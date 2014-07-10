@@ -15,8 +15,8 @@ class Hello:
         return web.data()
 
     def DELETE(self):
-        pass
-        #return '[]'
+        # TODO: delete the stuff
+        return '[]'
 
     def OPTIONS(self):
         web.header("access-control-allow-methods",
