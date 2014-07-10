@@ -16,6 +16,7 @@ class Hello:
 
     def POST(self):
         task = json.loads(web.data())
+        task["completed"] = False
         Hello.todos.append(task)
         return json.dumps(task)
 
