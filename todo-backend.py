@@ -1,4 +1,5 @@
 import web
+import json
 
 def main():
     urls = ["/", Hello]
@@ -8,14 +9,18 @@ def main():
     app.run()
 
 class Hello:
+    todos = []
+
     def GET(self):
-        return '[]'
+        return json.dumps(Hello.todos)
 
     def POST(self):
-        return web.data()
+        task = json.loads(web.data())
+        Hello.todos.append(task)
+        return json.dumps(task)
 
     def DELETE(self):
-        # TODO: delete the stuff
+        Hello.todos = []
         return '[]'
 
     def OPTIONS(self):
