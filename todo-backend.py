@@ -46,9 +46,19 @@ class TodoItem:
         todo = todos_globalton[uid]
         return json.dumps(todo)
 
+    def PATCH(self,uid):
+        todo = todos_globalton[uid]
+        changes = json.loads(web.data())
+        merged_todo = dict(todo.items() + changes.items())
+        todos_globalton[uid] = merged_todo
+        return json.dumps(merged_todo)
+
+    def DELETE(self,uid):
+        del todos_globalton[uid]
+
     def OPTIONS(self,uid):
         web.header("access-control-allow-methods",
-                "GET,HEAD,POST,DELETE,OPTIONS,PUT")
+                "GET,HEAD,POST,DELETE,OPTIONS,PUT,PATCH")
 
 
 def cors_headers():
