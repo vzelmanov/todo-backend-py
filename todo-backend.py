@@ -15,7 +15,6 @@ def main():
 todos_globalton = {}
 
 class TodosCollection:
-
     def GET(self):
         return self.todos_as_json()
 
@@ -49,9 +48,8 @@ class TodoItem:
     def PATCH(self,uid):
         todo = todos_globalton[uid]
         changes = json.loads(web.data())
-        merged_todo = dict(todo.items() + changes.items())
-        todos_globalton[uid] = merged_todo
-        return json.dumps(merged_todo)
+        todo.update(changes)
+        return json.dumps(todo)
 
     def DELETE(self,uid):
         del todos_globalton[uid]
